@@ -6,8 +6,6 @@ import java.util.Date;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,7 @@ import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -37,7 +35,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetSuccessMessageAfterCorrectFilling() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
@@ -54,7 +52,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetWarningForIncorrectTown() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону-1");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
@@ -70,7 +68,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetWarningForIncorrectDate() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
@@ -86,7 +84,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetWarningForIncorrectName() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
@@ -102,7 +100,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetWarningForIncorrectPhone() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
@@ -118,7 +116,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetRedTextIfCheckboxIsntSelect() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
@@ -133,9 +131,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetWarningIfTownIsntFilling() {
-        Configuration.holdBrowserOpen = true;
-//        $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону-1");
-//        $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
         $x("//input[@placeholder=\"Дата встречи\"]").sendKeys(Keys.BACK_SPACE);
         $x("//input[@placeholder=\"Дата встречи\"]").setValue(dateShift(4));
@@ -149,12 +145,11 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetWarningIfDateIsntFilling() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
         $x("//input[@placeholder=\"Дата встречи\"]").sendKeys(Keys.BACK_SPACE);
-        //$x("//input[@placeholder=\"Дата встречи\"]").setValue(dateShift(-1));
         $x("//input[@placeholder=\"Дата встречи\"]").sendKeys(Keys.TAB);
         $x("//*[@name='name']").setValue("Анна-Мария Иванова-Редгрейв");
         $x("//*[@name='phone']").setValue("+89991234567");
@@ -165,14 +160,13 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetWarningIfNameIsntFilling() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
         $x("//input[@placeholder=\"Дата встречи\"]").sendKeys(Keys.BACK_SPACE);
         $x("//input[@placeholder=\"Дата встречи\"]").setValue(dateShift(4));
         $x("//input[@placeholder=\"Дата встречи\"]").sendKeys(Keys.TAB);
-        //$x("//*[@name='name']").setValue("Анна Иванова11");
         $x("//*[@name='phone']").setValue("+89991234567");
         $x("//*[@class=\"checkbox__box\"]").click();
         $x("//div[@class=\"form-field form-field_size_m form-field_theme_alfa-on-white\"]/button[@role=\"button\"]").click();
@@ -181,7 +175,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldGetWarningIfPhoneIsntFilling() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         $x("//input[@placeholder=\"Город\"]").setValue("Ростов-на-Дону");
         $x("//input[@placeholder=\"Город\"]").sendKeys(Keys.TAB);
         $x("//input[@placeholder=\"Дата встречи\"]").doubleClick();
@@ -189,7 +183,6 @@ public class CardDeliveryTest {
         $x("//input[@placeholder=\"Дата встречи\"]").setValue(dateShift(4));
         $x("//input[@placeholder=\"Дата встречи\"]").sendKeys(Keys.TAB);
         $x("//*[@name='name']").setValue("Анна Иванова");
-        //$x("//*[@name='phone']").setValue("+8999123456*");
         $x("//*[@class=\"checkbox__box\"]").click();
         $x("//div[@class=\"form-field form-field_size_m form-field_theme_alfa-on-white\"]/button[@role=\"button\"]").click();
         $x("//span[@data-test-id=\"phone\"]//span[@class=\"input__sub\"]").shouldHave(Condition.exactText("Поле обязательно для заполнения"));
